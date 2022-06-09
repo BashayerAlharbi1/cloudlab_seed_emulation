@@ -180,8 +180,6 @@ for i in range(params.nodeCount):
     #Run service for manager node
     if i == 0:
         node.addService(pg.Execute(shell="bash", command="/local/repository/managerStartUp.sh {} 2>&1 > /local/repository/start1.log".format(params.nodeCount + 1)))
-        node.addService(pg.Execute(shell="bash", command="/local/repository/file1.sh {} 2>&1 > /local/repository/start2.log".format(params.nodeCount + 1)))
-        node.addService(pg.Execute(shell="bash", command="/local/repository/file2.sh {} 2>&1 > /local/repository/start3.log".format(params.nodeCount + 1)))
     #Run service for worker nodes
     else:
         node.addService(pg.Execute(shell="bash", command="/local/repository/workerStartUp.sh 2>&1 > /local/repository/start.log"))
