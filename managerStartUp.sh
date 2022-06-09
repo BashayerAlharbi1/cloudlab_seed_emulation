@@ -14,7 +14,12 @@ echo \
 
 sudo apt-get update
 echo "----------------------Instaling DOCKER COMPSE -----------------"
-sudo docker-compose
+sudo apt-get install docker-compose
+sudo wget https://github.com/docker/compose/releases/download/v2.5.1/docker-compose-linux-x86_64 -P ~/
+sudo mv ~/docker-compose-linux-x86_64 ~/docker-compose
+sudo chmod +x ~/docker-compose
+sudo mv ~/docker-compose /usr/local/bin/docker-compose
+sudo ln -fs /usr/local/bin/docker-compose /usr/bin/docker-compose
 echo "----------------------END Instaling DOCKER COMPSE -----------------"
 
 
