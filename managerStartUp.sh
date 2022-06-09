@@ -1,5 +1,4 @@
 #!/bin/bash
-echo "STARTIING -----------------"
 MANAGER_IP=192.168.6.1
 sudo apt-get update
 sudo apt-get -y install \
@@ -13,21 +12,18 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt-get update
-echo "----------------------Instaling DOCKER COMPSE -----------------"
-sudo apt-get install docker-compose
+sudo apt-get -y install docker-compose
 sudo wget https://github.com/docker/compose/releases/download/v2.5.1/docker-compose-linux-x86_64 -P ~/
 sudo mv ~/docker-compose-linux-x86_64 ~/docker-compose
 sudo chmod +x ~/docker-compose
 sudo mv ~/docker-compose /usr/local/bin/docker-compose
 sudo ln -fs /usr/local/bin/docker-compose /usr/bin/docker-compose
-echo "----------------------END Instaling DOCKER COMPSE -----------------"
 
-
-sudo apt-get -y install docker-ce docker-ce-cli containerd.io
-sudo apt -y install docker-compose
-curl -L "https://github.com/docker/compose/releases/download/$(curl https://github.com/docker/compose/releases | grep -m1 '<a href="/docker/compose/releases/download/' | grep -o 'v[0-9:].[0-9].[0-9]')/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-sudo ln -fs /usr/local/bin/docker-compose /usr/bin/docker-compose
+#sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+#sudo apt -y install docker-compose
+#curl -L "https://github.com/docker/compose/releases/download/$(curl https://github.com/docker/compose/releases | grep -m1 '<a href="/docker/compose/releases/download/' | grep -o 'v[0-9:].[0-9].[0-9]')/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+#sudo chmod +x /usr/local/bin/docker-compose
+#sudo ln -fs /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 sudo docker swarm init --advertise-addr=$MANAGER_IP
 
@@ -39,4 +35,3 @@ do
     sleep 10
 done
 # Create docker registry
-echo "END -----------------"
