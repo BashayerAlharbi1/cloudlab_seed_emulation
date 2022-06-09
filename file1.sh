@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo apt-get update
 sudo docker-compose
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io
