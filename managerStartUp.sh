@@ -13,7 +13,11 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt-get update
+echo "----------------------Instaling DOCKER COMPSE -----------------"
 sudo docker-compose
+echo "----------------------END Instaling DOCKER COMPSE -----------------"
+
+
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 sudo apt -y install docker-compose
 curl -L "https://github.com/docker/compose/releases/download/$(curl https://github.com/docker/compose/releases | grep -m1 '<a href="/docker/compose/releases/download/' | grep -o 'v[0-9:].[0-9].[0-9]')/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
