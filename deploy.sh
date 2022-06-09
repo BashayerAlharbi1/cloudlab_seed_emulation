@@ -1,5 +1,7 @@
 #!/bin/bash
 # Start up services
+
+sudo docker service create --name registry --publish published=5000,target=5000 registry:2
 filename='containers/priority.txt'
 while read p; do
     sudo docker-compose -f "containers/${p}/docker-compose.yml" build
