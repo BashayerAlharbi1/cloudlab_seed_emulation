@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "STARTIING -----------------"
 MANAGER_IP=192.168.6.1
 sudo apt-get update
 sudo apt-get -y install \
