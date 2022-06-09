@@ -1,4 +1,4 @@
-
+#!/bin/bash
 sudo docker swarm init --advertise-addr=$MANAGER_IP
 
 sudo modprobe mpls_router
