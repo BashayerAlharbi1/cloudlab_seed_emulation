@@ -8,7 +8,7 @@ services:
 
     hnode_151_web:
         build: ./hnode_151_web
-        container_name: as151h-web-10.151.0.71
+        image: 127.0.0.1:5000/hnode_151_web
         cap_add:
             - ALL
         sysctls:
@@ -29,7 +29,7 @@ services:
 
     rnode_151_router0:
         build: ./rnode_151_router0
-        container_name: as151r-router0-10.151.0.254
+        image: 127.0.0.1:5000/rnode_151_router0
         cap_add:
             - ALL
         sysctls:
