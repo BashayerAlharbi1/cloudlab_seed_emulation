@@ -1,4 +1,4 @@
-router id 10.0.0.3;
+router id 10.0.0.1;
 ipv4 table t_direct;
 protocol device {
 }
@@ -18,10 +18,10 @@ protocol direct local_nets {
     interface "net0";
 
 }
-define LOCAL_COMM = (152, 0, 0);
-define CUSTOMER_COMM = (152, 1, 0);
-define PEER_COMM = (152, 2, 0);
-define PROVIDER_COMM = (152, 3, 0);
+define LOCAL_COMM = (150, 0, 0);
+define CUSTOMER_COMM = (150, 1, 0);
+define PEER_COMM = (150, 2, 0);
+define PROVIDER_COMM = (150, 3, 0);
 ipv4 table t_bgp;
 protocol pipe {
     table t_bgp;
@@ -46,7 +46,7 @@ protocol bgp p_rs100 {
         export where bgp_large_community ~ [LOCAL_COMM, CUSTOMER_COMM];
         next hop self;
     };
-    local 10.100.0.152 as 152;
+    local 10.100.0.150 as 150;
     neighbor 10.100.0.100 as 100;
 }
 
