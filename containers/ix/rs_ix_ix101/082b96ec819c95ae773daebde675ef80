@@ -1,9 +1,6 @@
 #!/bin/bash
 chmod +x /interface_setup
 /interface_setup
-ip li add dummy0 type dummy
-ip li set dummy0 up
-ip addr add 10.0.0.5/32 dev dummy0
 [ ! -d /run/bird ] && mkdir /run/bird
 bird -d &
 

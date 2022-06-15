@@ -1,4 +1,4 @@
-router id 10.0.0.5;
+router id 10.0.0.1;
 ipv4 table t_direct;
 protocol device {
 }
@@ -18,10 +18,10 @@ protocol direct local_nets {
     interface "net0";
 
 }
-define LOCAL_COMM = (151, 0, 0);
-define CUSTOMER_COMM = (151, 1, 0);
-define PEER_COMM = (151, 2, 0);
-define PROVIDER_COMM = (151, 3, 0);
+define LOCAL_COMM = (3, 0, 0);
+define CUSTOMER_COMM = (3, 1, 0);
+define PEER_COMM = (3, 2, 0);
+define PROVIDER_COMM = (3, 3, 0);
 ipv4 table t_bgp;
 protocol pipe {
     table t_bgp;
@@ -35,19 +35,19 @@ protocol pipe {
     import none;
     export filter { bgp_large_community.add(LOCAL_COMM); bgp_local_pref = 40; accept; };
 }
-protocol bgp u_as3 {
+protocol bgp c_as151 {
     ipv4 {
         table t_bgp;
         import filter {
-            bgp_large_community.add(PROVIDER_COMM);
-            bgp_local_pref = 10;
+            bgp_large_community.add(CUSTOMER_COMM);
+            bgp_local_pref = 30;
             accept;
         };
-        export where bgp_large_community ~ [LOCAL_COMM, CUSTOMER_COMM];
+        export all;
         next hop self;
     };
-    local 10.100.0.151 as 151;
-    neighbor 10.100.0.3 as 3;
+    local 10.100.0.3 as 3;
+    neighbor 10.100.0.151 as 151;
 }
 ipv4 table t_ospf;
 protocol ospf ospf1 {
@@ -68,5 +68,35 @@ protocol pipe {
     peer table master4;
     import none;
     export all;
+}
+protocol bgp ibgp1 {
+    ipv4 {
+        table t_bgp;
+        import all;
+        export all;
+        igp table t_ospf;
+    };
+    local 10.0.0.1 as 3;
+    neighbor 10.0.0.2 as 3;
+}
+protocol bgp ibgp2 {
+    ipv4 {
+        table t_bgp;
+        import all;
+        export all;
+        igp table t_ospf;
+    };
+    local 10.0.0.1 as 3;
+    neighbor 10.0.0.3 as 3;
+}
+protocol bgp ibgp3 {
+    ipv4 {
+        table t_bgp;
+        import all;
+        export all;
+        igp table t_ospf;
+    };
+    local 10.0.0.1 as 3;
+    neighbor 10.0.0.4 as 3;
 }
 
